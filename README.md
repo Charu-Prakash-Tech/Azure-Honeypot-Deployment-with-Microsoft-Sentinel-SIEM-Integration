@@ -21,16 +21,29 @@ In an era where cyber threats are ever-evolving, the ability to monitor and anal
 ## 🚀 My Approach and Execution:
 
 ### 1. Deploying the Honeypot in Azure
-I began by logging into the Azure Portal and provisioning a new Windows 10 virtual machine. The configuration included enabling RDP access, setting a strong password, and exposing inbound ports by modifying the Network Security Group (NSG). This step effectively turned the VM into a lure for malicious actors scanning for open systems.
+I began by logging into the Azure Portal and created a resource group , virtual network and Windows 10 virtual machine. The configuration included enabling RDP access, setting a strong password, and exposing inbound ports by modifying the Network Security Group (NSG). This step effectively turned the VM into a lure for malicious actors scanning for open systems.
+
+![IMAGE](Resources/Images/Resource%20Group.png)
+
+![IMAGE](Resources/Images/Virtual%20Network%201.png)
+
+![IMAGE](Resources/Images/Virtual%20Machine.png)
+
 
 To maximize the honeypot’s visibility, I:
+
 - Allowed all inbound traffic via NSG rule.
+  
+  ![IMAGE](Resources/Images/NSG.png)
+
 - Disabled the internal Windows Firewall using `wf.msc`.
+  
+  ![IMAGE](Resources/Images/Windows%20Defender.png)
 
 ### 2. Setting Up Log Collection via Microsoft Sentinel
-Next, I created a Log Analytics Workspace and attached it to Microsoft Sentinel. I then connected the VM to the workspace using the "Windows Security Events via AMA" data connector. The setup involved:
-- Creating a Data Collection Rule (DCR).
-- Linking the VM and Log Analytics Workspace.
+Next, I created a Log Analytics Workspace and attached it to Microsoft Sentinel. I then connected the VM to the workspace using the "Windows Security Events via AMA" data connector.
+
+![IMAGE](Resources/Images/Windows%20Security%20Events.png)
 
 This ensured all login attempts, including failed attempts (Event ID 4625), were forwarded to Sentinel for analysis.
 
@@ -44,6 +57,8 @@ SecurityEvent
 ### 4. Enriching Logs with GeoIP Data
 To gain more context, I imported a massive GeoIP database (CSV format with ~54,000 rows) as a Sentinel Watchlist named geoip. This file contained IP ranges mapped to country, region, and city details.
 
+![IMAGE](Resources/Images/Watch%20List.png)
+
 ### 5. Building the Attack Map
 The final and most visually appealing part of the project was creating a custom Workbook in Microsoft Sentinel.
 
@@ -51,7 +66,11 @@ The final and most visually appealing part of the project was creating a custom 
 
 - Then, I imported a JSON template (map.json) that transformed the enriched data into an interactive world map.
 
+  ![IMAGE](Resources/Images/Workbook.png)
+
 - This visualization made it easy to detect high-volume attack regions at a glance.
+
+  ![IMAGE](Resources/Images/Attack.png)
 
 ### ✅ Outcome
 
@@ -82,6 +101,8 @@ The final and most visually appealing part of the project was creating a custom 
 - Data Enrichment: Enriching raw telemetry with geographic data adds another layer of intelligence and makes threat data actionable.
 
 - Cloud Vulnerabilities: The project highlighted the importance of securing cloud-hosted VMs against brute force attacks and misconfigurations.
+
+[▶️ Watch Video](Resources/Video/Brute%20Force%20Logs.mp4)
 
 ### Conclusion:
 
