@@ -102,6 +102,8 @@ The final and most visually appealing part of the project was creating a custom 
 
 - Cloud Vulnerabilities: The project highlighted the importance of securing cloud-hosted VMs against brute force attacks and misconfigurations.
 
+  ![IMAGE](Resources/Images/Attack%202.png)
+
 [▶️ Watch Video](Resources/Video/Brute%20Force%20Logs.mp4)
 
 ### Conclusion:
